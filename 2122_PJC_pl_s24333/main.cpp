@@ -52,27 +52,39 @@ void pomoc(){
 
 void prepaprePlayer(std::vector<Rat> &v){}
 
+/**
+ * prepares all enemies that the player will encounter in the game
+ * @param v an empty vector composed of vectors that will hold enemy rats. every nested vector is a single encounter
+ */
 void prepareEnemies(std::vector<std::vector<Rat>> &v){
     auto seed = std::chrono::steady_clock::now().time_since_epoch().count();
     std::default_random_engine rng(seed);
-    std::vector<Rat> v1;
-    std::vector<Rat> v2;
-    std::vector<Rat> v3;
-    std::vector<Rat> v4;
-    std::vector<Rat> v5;
-    switch(rng()%5){
-        case 0:
-            v1 = {FireRat(1+dificulty), EarthRat(1+dificulty), IceRat(1+dificulty), AirRat(1+dificulty)};
-            break;
-        case 1:
-            v1 = {WaterRat(1+dificulty), SteelRat(1+dificulty), IceRat(1+dificulty), AirRat(1+dificulty)};
-            break;
-        case 2:
-            v1 = {FireRat(1+dificulty), WaterRat(1+dificulty), SteelRat(1+dificulty), EarthRat(1+dificulty)};
-            break;
-        default:
-            v1 = {WaterRat(1+dificulty),  EarthRat(1+dificulty), FireRat(1+dificulty), AirRat(1+dificulty)};
-            break;
+    for(int i = 0; i<5; i++){
+        std::vector<Rat> v1={};
+        for(int j = 0; j<4; j++){
+            if(i<5){
+                switch(rng()%100){
+                    case 0 ... 9:
+                        v1.push_back(WaterRat(i+dificulty));
+                        break;
+                    case 1:
+                        v.push_back(EarthRat(i+dificulty));
+                        break;
+                    case 2:
+                        v.push_back({FireRat(i+dificulty), WaterRat(i+dificulty), SteelRat(i+dificulty), EarthRat(i+dificulty)});
+                        break;
+                    case 3 ... 5:
+                        v.push_back({WaterRat(i+dificulty),  EarthRat(i+dificulty), FireRat(i+dificulty), AirRat(i+dificulty)});
+                        break;
+                    case 6:
+                        v.push_back({SteelRat(i+dificulty),  SwampRat(i+dificulty), FireRat(i+dificulty), AirRat(i+dificulty)});
+                }
+            }
+            else{
+                if(rng()%100==99)
+                    v.push_back({WaterRat(1+dificulty),  EarthRat(1+dificulty), FireRat(1+dificulty), AirRat(1+dificulty), ArceusRat(1)});
+            }
+        }
+        v.push_back(v1);
     }
-    v.push_back(v1);
 }
