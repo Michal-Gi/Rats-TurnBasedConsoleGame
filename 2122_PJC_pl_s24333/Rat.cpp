@@ -99,7 +99,7 @@ Rat::Rat(int lvl, double hp, double str, double dex, double xpWorth, double xpTo
                                                                                    xpWorth(xpWorth),
                                                                                    xpToEvolve(xpToEvolve),
                                                                                    species(species), type(type),
-                                                                                   adv(adv), dis(dis) {}
+                                                                                   adv(adv), dis(dis), inNormalState(true) {}
 
 int Rat::getLvl() const {
     return lvl;

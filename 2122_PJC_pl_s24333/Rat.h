@@ -21,6 +21,7 @@ protected:
     Type type;
     std::list<Type> adv;
     std::list<Type> dis;
+    bool inNormalState;
 public:
     /**
      * basic attack script that includes elemental affinities
