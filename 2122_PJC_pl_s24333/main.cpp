@@ -91,19 +91,19 @@ void prepareEnemies(std::vector<std::vector<Rat>> &v){
                     case 72 ... 77:
                         v1.push_back(FieldRat(i+dificulty));
                         break;
-                    case 78 ... 83:
+                    case 78 ... 82:
                         v1.push_back(ThunderRat(i+dificulty));
                         break;
-                    case 84 ... 89:
+                    case 83 ... 87:
                         v1.push_back(LightningRat(i+dificulty));
                         break;
-                    case 90 ... 94:
+                    case 88 ... 92:
                         v1.push_back(GlacialRat(i+dificulty));
                         break;
-                    case 95 ... 97:
+                    case 93 ... 96:
                         v1.push_back(TitaniumRat(i+dificulty));
                         break;
-                    case 98 ... 99:
+                    case 97 ... 98:
                         v1.push_back(KingRat(i+dificulty));
                         break;
                     default :
