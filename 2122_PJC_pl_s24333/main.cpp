@@ -67,17 +67,48 @@ void prepareEnemies(std::vector<std::vector<Rat>> &v){
                     case 0 ... 9:
                         v1.push_back(WaterRat(i+dificulty));
                         break;
-                    case 1:
-                        v.push_back(EarthRat(i+dificulty));
+                    case 10 ... 19:
+                        v1.push_back(EarthRat(i+dificulty));
                         break;
-                    case 2:
-                        v.push_back({FireRat(i+dificulty), WaterRat(i+dificulty), SteelRat(i+dificulty), EarthRat(i+dificulty)});
+                    case 20 ... 29:
+                        v1.push_back(FireRat(i+dificulty));
                         break;
-                    case 3 ... 5:
-                        v.push_back({WaterRat(i+dificulty),  EarthRat(i+dificulty), FireRat(i+dificulty), AirRat(i+dificulty)});
+                    case 30 ... 39:
+                        v1.push_back(AirRat(i+dificulty));
                         break;
-                    case 6:
-                        v.push_back({SteelRat(i+dificulty),  SwampRat(i+dificulty), FireRat(i+dificulty), AirRat(i+dificulty)});
+                    case 40 ... 49:
+                        v1.push_back(IceRat(i+dificulty));
+                        break;
+                    case 50 ... 59:
+                        v1.push_back(SteelRat(i+dificulty));
+                        break;
+                    case 60 ... 65:
+                        v1.push_back(SwampRat(i+dificulty));
+                        break;
+                    case 66 ... 71:
+                        v1.push_back(SewerRat(i+dificulty));
+                        break;
+                    case 72 ... 77:
+                        v1.push_back(FieldRat(i+dificulty));
+                        break;
+                    case 78 ... 83:
+                        v1.push_back(ThunderRat(i+dificulty));
+                        break;
+                    case 84 ... 89:
+                        v1.push_back(LightningRat(i+dificulty));
+                        break;
+                    case 90 ... 94:
+                        v1.push_back(GlacialRat(i+dificulty));
+                        break;
+                    case 95 ... 97:
+                        v1.push_back(TitaniumRat(i+dificulty));
+                        break;
+                    case 98 ... 99:
+                        v1.push_back(KingRat(i+dificulty));
+                        break;
+                    default :
+                        v1.push_back(ArceusRat(1));
+                        break;
                 }
             }
             else{
