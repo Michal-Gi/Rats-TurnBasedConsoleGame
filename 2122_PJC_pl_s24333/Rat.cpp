@@ -114,7 +114,7 @@ double Rat::getDex() const {
 }
 
 double Rat::getUlt() const {
-    return ult;
+    return sp;
 }
 
 double Rat::getXpToEvolve() const {

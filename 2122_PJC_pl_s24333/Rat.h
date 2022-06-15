@@ -16,7 +16,7 @@ public:
     enum Type {WATER, FIRE, EARTH, AIR, STEEL, ICE};
 protected:
     int lvl;
-    double hp, str, dex, ult, xpWorth, xpToEvolve;
+    double hp, str, dex, sp, xpWorth, xpToEvolve;
     std::string species;
     Type type;
     std::list<Type> adv;
@@ -34,7 +34,8 @@ public:
 
     Rat(int lvl, double hp, double str, double dex, double xpWorth, double xpToEvolve, const std::string &species,
         Type type, const std::list<Type> &adv, const std::list<Type> &dis);
-    Rat();
+
+    void ult();
 
     double getHp() const;
 
