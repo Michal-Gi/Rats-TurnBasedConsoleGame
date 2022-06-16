@@ -70,40 +70,42 @@ void help() {
  * @param v empty vector that will be filled with player's rats
  */
 void preparePlayer(std::vector<Rat> &v) {
-    chosenRat = 0;
-    int x;
-    std::string input;
-    v = {};
-    std::vector<Rat> rats = {WaterRat(1), EarthRat(1), FireRat(1), AirRat(1), IceRat(1), SteelRat(1), SwampRat(1),
-                             SewerRat(1), FieldRat(1), ThunderRat(1), GlacialRat(1), LightningRat(1), TitaniumRat(1),
-                             KingRat(1), ArceusRat(1)};
-    for (int i = 1; i < 16; i++) {
-        std::cout << i << " - " << rats[i - 1].getSpecies() << '\n';
-    }
-    while (v.size() < 6) {
-        std::cout << "Please enter a number corresponding with the rat you want to add to your deck\n";
-        std::cin >> input;
-        if (isInteger(input)) {
-            x = convertToInt(input);
-            if (x > 0 && x < 16) {
-                std::cout << "given argument - " << x << '\n';
-                v.push_back(rats[x - 1]);
-            } else
-                std::cout << "Wrong Argument.\ngiven argument - " << x << '\n';
-        } else {
-            std::cout << "wrong type of argument\n";
+    bool isCharacterDone = false;
+    do {
+        chosenRat = 0;
+        int x;
+        std::string input;
+        v = {};
+        std::vector<Rat> rats = {WaterRat(1), EarthRat(1), FireRat(1), AirRat(1), IceRat(1), SteelRat(1), SwampRat(1),
+                                 SewerRat(1), FieldRat(1), ThunderRat(1), GlacialRat(1), LightningRat(1),
+                                 TitaniumRat(1),
+                                 KingRat(1), ArceusRat(1)};
+        for (int i = 1; i < 16; i++) {
+            std::cout << i << " - " << rats[i - 1].getSpecies() << '\n';
         }
-    }
-    std::cout << "Your deck is composed of:\n";
-    for (Rat const &r: v)
-        std::cout << r.getSpecies() << '\n';
-    std::cout << "Do you want to continue?\ny - yes\nn - no\n";
+        while (v.size() < 6) {
+            std::cout << "Please enter a number corresponding with the rat you want to add to your deck\n";
+            std::cin >> input;
+            if (isInteger(input)) {
+                x = convertToInt(input);
+                if (x > 0 && x < 16) {
+                    std::cout << "given argument - " << x << '\n';
+                    v.push_back(rats[x - 1]);
+                } else
+                    std::cout << "Wrong Argument.\ngiven argument - " << x << '\n';
+            } else {
+                std::cout << "wrong type of argument\n";
+            }
+        }
+        std::cout << "Your deck is composed of:\n";
+        for (Rat const &r: v)
+            std::cout << r.getSpecies() << '\n';
+        std::cout << "Do you want to continue?\ny - yes\nn - no\n";
 
-    std::cin >> input;
-    if (input == "y")
-        return;
-    else
-        preparePlayer(v);
+        std::cin >> input;
+        if (input == "y")
+            isCharacterDone = true;
+    }while(!isCharacterDone);
 }
 
 /**
@@ -177,15 +179,53 @@ void prepareEnemies(std::vector<std::vector<Rat>> &v) {
 }
 
 void fight(std::vector<Rat> &player, Rat &enemy, std::vector<std::vector<Rat>> &enemies) {
-    int input;
+    std::string input;
     bool isPlayerAlive = true, isEnemyAlive = true;
     while (isPlayerAlive && isEnemyAlive) {
         std::cout
                 << "your turn! what do you want to do?\n1 - attack\n2 - use ultimate attack\n3 - change your rat for another one in your possession\n4 - evolve your rat\n";
         std::cin >> input;
-        if (input == 1) {
-
-        }
+        if(isInteger(input)){
+            int x = convertToInt(input);
+            bool fuckup = true;
+            do{
+            switch(x){
+                case 1:
+                    player.at(chosenRat).attack(enemy);
+                    if(enemy.getHp()<=0){
+                        isEnemyAlive=false;
+                        if(currentEnemyRat == enemies.at(currentEnemyBatch).size()-1){
+                            if(currentEnemyBatch == enemies.size()-1){
+                                std::cout<<"you won! you are the best rat trainer in all of the land!\n";
+                            }else{
+                                currentEnemyBatch++;
+                                std::cout<<"You've beaten the enemy rat! It was the last one on this level!\n";
+                            }
+                        }else{
+                            currentEnemyRat++;
+                            std::cout<<"You've beaten the enemy rat!";
+                        }
+                    }
+                    fuckup = false;
+                    break;
+                case 2:
+                    std::cout<<"used ultimate";
+                    fuckup = false;
+                    break;
+                case 3:
+                    std::cout<<"changed rat";
+                    fuckup = false;
+                    break;
+                case 4:
+                    std::cout<<"evolve";
+                    fuckup = false;
+                    break;
+                default :
+                    std::cout<<"wrong argument";
+                    break;
+            }}while(fuckup);
+        }else
+            std::cout<<"Wrong type of argument!\n";
     }
 }
 
@@ -196,9 +236,9 @@ bool isInteger(std::string const &s) {
 
 int convertToInt(std::string const &s) {
     int x = 0;
-    for (int i = 0; i < s.size(); i++) {
+    for (char i : s) {
         x *= 10;
-        x += s.at(i) - '0';
+        x += i - '0';
     }
     return x;
 }
