@@ -136,3 +136,7 @@ const std::list<Rat::Type> &Rat::getAdv() const {
 const std::list<Rat::Type> &Rat::getDis() const {
     return dis;
 }
+
+void Rat::addXp(int const& x) {
+    xpToEvolve-=x;
+}

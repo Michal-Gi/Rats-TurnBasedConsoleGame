@@ -9,7 +9,6 @@
  * to do:
  * make fighting loops
  * implement ultimates
- * implement leveling up
  * implement winning the game
  * save and exit/load system
  */
@@ -105,7 +104,7 @@ void preparePlayer(std::vector<Rat> &v) {
         std::cin >> input;
         if (input == "y")
             isCharacterDone = true;
-    }while(!isCharacterDone);
+    } while (!isCharacterDone);
 }
 
 /**
@@ -181,51 +180,62 @@ void prepareEnemies(std::vector<std::vector<Rat>> &v) {
 void fight(std::vector<Rat> &player, Rat &enemy, std::vector<std::vector<Rat>> &enemies) {
     std::string input;
     bool isPlayerAlive = true, isEnemyAlive = true;
+    bool fuckup = true;
     while (isPlayerAlive && isEnemyAlive) {
-        std::cout
-                << "your turn! what do you want to do?\n1 - attack\n2 - use ultimate attack\n3 - change your rat for another one in your possession\n4 - evolve your rat\n";
-        std::cin >> input;
-        if(isInteger(input)){
-            int x = convertToInt(input);
-            bool fuckup = true;
-            do{
-            switch(x){
-                case 1:
-                    player.at(chosenRat).attack(enemy);
-                    if(enemy.getHp()<=0){
-                        isEnemyAlive=false;
-                        if(currentEnemyRat == enemies.at(currentEnemyBatch).size()-1){
-                            if(currentEnemyBatch == enemies.size()-1){
-                                std::cout<<"you won! you are the best rat trainer in all of the land!\n";
-                            }else{
-                                currentEnemyBatch++;
-                                std::cout<<"You've beaten the enemy rat! It was the last one on this level!\n";
+        do {
+            std::cout
+                    << "your turn! what do you want to do?\n1 - attack\n2 - use ultimate attack\n3 - change your rat for another one in your possession\n4 - evolve your rat\n";
+            std::cin >> input;
+            if (isInteger(input)) {
+                int x = convertToInt(input);
+                switch (x) {
+                    case 1:
+                        player.at(chosenRat).attack(enemy);
+                        if (enemy.getHp() <= 0) {
+                            isEnemyAlive = false;
+                            player.at(chosenRat).addXp(enemy.getXpWorth());
+                            if (currentEnemyRat == enemies.at(currentEnemyBatch).size() - 1) {
+                                if (currentEnemyBatch == enemies.size() - 1) {
+                                    std::cout << "you won! you are the best rat trainer in all of the land!\n";
+                                } else {
+                                    currentEnemyBatch++;
+                                    std::cout << "You've beaten the enemy rat! It was the last one on this level!\n";
+                                }
+                            } else {
+                                currentEnemyRat++;
+                                std::cout << "You've beaten the enemy rat!\n";
                             }
-                        }else{
-                            currentEnemyRat++;
-                            std::cout<<"You've beaten the enemy rat!";
                         }
-                    }
-                    fuckup = false;
-                    break;
-                case 2:
-                    std::cout<<"used ultimate";
-                    fuckup = false;
-                    break;
-                case 3:
-                    std::cout<<"changed rat";
-                    fuckup = false;
-                    break;
-                case 4:
-                    std::cout<<"evolve";
-                    fuckup = false;
-                    break;
-                default :
-                    std::cout<<"wrong argument";
-                    break;
-            }}while(fuckup);
-        }else
-            std::cout<<"Wrong type of argument!\n";
+                        fuckup = false;
+                        break;
+                    case 2:
+                        std::cout << "used ultimate\n";
+                        fuckup = false;
+                        break;
+                    case 3:
+                        std::cout << "changed rat\n";
+                        fuckup = false;
+                        break;
+                    case 4:
+                        if(player.at(chosenRat).getXpToEvolve()<=0){
+                            player.at(chosenRat).evolve();
+                            fuckup=false;
+                        }else{
+                            std::cout<<player.at(chosenRat).getSpecies()<<" requires "<< player.at(chosenRat).getXpToEvolve()<<" xp to evolve";
+                        }
+                        break;
+                    default :
+                        std::cout << "wrong argument\n";
+                        break;
+                }
+            } else
+                std::cout << "Wrong type of argument!\n";
+        } while (fuckup);
+        std::cout<<"enemy turn! Hostile "<<enemy.getSpecies()<<" attacks!\n";
+        enemy.attack(player.at(chosenRat));
+        if(player.at(chosenRat).getHp()<=0){
+
+        }
     }
 }
 
@@ -236,7 +246,7 @@ bool isInteger(std::string const &s) {
 
 int convertToInt(std::string const &s) {
     int x = 0;
-    for (char i : s) {
+    for (char i: s) {
         x *= 10;
         x += i - '0';
     }

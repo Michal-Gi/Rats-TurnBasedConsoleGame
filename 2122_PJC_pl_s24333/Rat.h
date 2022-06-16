@@ -59,6 +59,7 @@ public:
     const std::list<Type> &getAdv() const;
 
     const std::list<Type> &getDis() const;
+    void addXp(int const& x);
 };
 
 
