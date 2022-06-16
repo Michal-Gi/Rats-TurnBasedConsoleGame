@@ -9,19 +9,21 @@
 #include <string>
 
 /**
- * klasa abstrakcyjna będąca tameplatem każdego potwora
+ * A class that is the template for every rat in the game
+ * rats are creatures used in battles
  */
 class Rat {
 public:
     enum Type {WATER, FIRE, EARTH, AIR, STEEL, ICE};
+    enum State {PARALYZED, CHARMED, NAUSENED, UNCONSCIOUS, NORMAL};
 protected:
-    int lvl;
-    double hp, str, dex, sp, xpWorth, xpToEvolve;
+    int lvl, cantMove;
+    double hp, str, dex, sp, xpWorth, xpToEvolve, maxHp, maxStr, maxDex;
     std::string species;
     Type type;
+    State state;
     std::list<Type> adv;
     std::list<Type> dis;
-    bool inNormalState;
 public:
     /**
      * basic attack script that includes elemental affinities
@@ -36,7 +38,7 @@ public:
     Rat(int lvl, double hp, double str, double dex, double xpWorth, double xpToEvolve, const std::string &species,
         Type type, const std::list<Type> &adv, const std::list<Type> &dis);
 
-    void ult();
+    void ult(Rat &enemy);
 
     double getHp() const;
 
@@ -60,6 +62,16 @@ public:
 
     const std::list<Type> &getDis() const;
     void addXp(int const& x);
+
+    void paralyzeForTurns(int const& x);
+
+    State getState() const;
+
+    void setState(State state);
+
+    int getCantMove() const;
+
+    void setCantMove(int cantMove);
 };
 
 

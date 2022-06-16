@@ -9,13 +9,6 @@ AirRat::AirRat(int level) : Rat(level, 10 + level / 2, 5 + level / 2, 5 + level,
                                 "Air rat", AIR, {ICE},
                                 {EARTH, STEEL}) {}
 
-void AirRat::ult() {
-    if(inNormalState)
-        std::cout<<"uzyto ulta";
-    else
-        std::cout<<"nie mozna uzyc ulta";
-}
-
 EarthRat::EarthRat(int level) : Rat(level, 25 + level, 5 + level / 2, 2 + level / 2, 10 * level, 100 * level,
                                     "Earth rat", EARTH, {FIRE, ICE, STEEL},
                                     {AIR}) {}

@@ -67,18 +67,21 @@ void Rat::evolve() {
                 switch (x) {
                     case 1 : {
                         this->str += 5;
+                        this->maxStr +=5;
                         std::cout << "strength increased by 5\n";
                         fuckup = false;
                         break;
                     }
                     case 2 : {
                         this->dex += 1;
+                        this->maxDex+=1;
                         std::cout << "dexterity increased by 1\n";
                         fuckup = false;
                         break;
                     }
                     case 3 : {
                         this->hp += 10;
+                        this->maxHp+=10;
                         std::cout << "health increased by 10\n";
                         fuckup = false;
                         break;
@@ -99,8 +102,35 @@ Rat::Rat(int lvl, double hp, double str, double dex, double xpWorth, double xpTo
                                                                                    xpWorth(xpWorth),
                                                                                    xpToEvolve(xpToEvolve),
                                                                                    species(species), type(type),
-                                                                                   adv(adv), dis(dis), inNormalState(true) {}
-
+                                                                                   adv(adv), dis(dis), cantMove(0), state(NORMAL), maxDex(dex), maxHp(hp), maxStr(str) {}
+void Rat::ult(Rat& enemy){
+    switch(this->type){
+        case AIR:
+            std::cout<<"used Air type ultimate attack! the enemy is now unconscious!\n";
+            enemy.setCantMove(this->lvl+1);
+            enemy.setState(UNCONSCIOUS);
+            break;
+        case WATER:
+            std::cout<<"used Water type ultimate attack! Your rat was healed for "<< this->str+5*(this->lvl+1) <<"!\n";
+            this->hp += this->str+5*(this->lvl+1);
+            if(hp>maxHp)
+                hp=maxHp;
+            break;
+        case FIRE:
+            std::cout<<"used Fire type ultimate attack! The enemy was hit for "<< str*(lvl+1)<<"points of damage!\n";
+            enemy.hp-=str*(lvl+1);
+            break;
+        case EARTH:
+            std::cout<<"used Earth type ultimate attack!\n";
+            break;
+        case STEEL:
+            std::cout<<"used Steel type ultimate attack!\n";
+            break;
+        case ICE:
+            std::cout<<"used Ice type ultimate attack!\n";
+            break;
+    }
+}
 int Rat::getLvl() const {
     return lvl;
 }
@@ -139,4 +169,24 @@ const std::list<Rat::Type> &Rat::getDis() const {
 
 void Rat::addXp(int const& x) {
     xpToEvolve-=x;
+}
+
+void Rat::paralyzeForTurns(int const& x){
+    this->cantMove+=x;
+}
+
+Rat::State Rat::getState() const {
+    return state;
+}
+
+void Rat::setState(Rat::State state) {
+    Rat::state = state;
+}
+
+int Rat::getCantMove() const {
+    return cantMove;
+}
+
+void Rat::setCantMove(int cantMove) {
+    Rat::cantMove = cantMove;
 }

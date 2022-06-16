@@ -209,7 +209,7 @@ void fight(std::vector<Rat> &player, Rat &enemy, std::vector<std::vector<Rat>> &
                         fuckup = false;
                         break;
                     case 2:
-                        std::cout << "used ultimate\n";
+                        player.at(chosenRat).ult(enemy);
                         fuckup = false;
                         break;
                     case 3:
@@ -231,10 +231,19 @@ void fight(std::vector<Rat> &player, Rat &enemy, std::vector<std::vector<Rat>> &
             } else
                 std::cout << "Wrong type of argument!\n";
         } while (fuckup);
-        std::cout<<"enemy turn! Hostile "<<enemy.getSpecies()<<" attacks!\n";
-        enemy.attack(player.at(chosenRat));
-        if(player.at(chosenRat).getHp()<=0){
-
+        if(isEnemyAlive){
+            if(enemy.getState()==Rat::NORMAL)
+            {
+                std::cout<<"enemy turn! Hostile "<<enemy.getSpecies()<<" attacks!\n";
+                enemy.attack(player.at(chosenRat));
+                if(player.at(chosenRat).getHp()<=0){
+                    isPlayerAlive=false;
+                }
+            }
+            else{
+                std::cout<< "enemy "<<enemy.getSpecies()<<" is "<<enemy.getState()<<" and can't attack for "<<enemy.getCantMove()<<" more turns\n";
+                enemy.setCantMove(enemy.getCantMove()-1);
+            }
         }
     }
 }

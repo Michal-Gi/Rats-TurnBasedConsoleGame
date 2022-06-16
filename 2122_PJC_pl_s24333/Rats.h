@@ -11,8 +11,6 @@
 class AirRat : public Rat {
 public:
     AirRat(int level);
-
-    void ult();
 };
 
 class WaterRat : public Rat {
