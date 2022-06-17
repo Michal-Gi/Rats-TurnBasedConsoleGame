@@ -1,6 +1,31 @@
-██████╗  █████╗ ████████╗███████╗    ████████╗██╗  ██╗███████╗     ██████╗  █████╗ ███╗   ███╗███████╗
-██╔══██╗██╔══██╗╚══██╔══╝██╔════╝    ╚══██╔══╝██║  ██║██╔════╝    ██╔════╝ ██╔══██╗████╗ ████║██╔════╝
-██████╔╝███████║   ██║   ███████╗       ██║   ███████║█████╗      ██║  ███╗███████║██╔████╔██║█████╗  
-██╔══██╗██╔══██║   ██║   ╚════██║       ██║   ██╔══██║██╔══╝      ██║   ██║██╔══██║██║╚██╔╝██║██╔══╝  
-██║  ██║██║  ██║   ██║   ███████║       ██║   ██║  ██║███████╗    ╚██████╔╝██║  ██║██║ ╚═╝ ██║███████╗
-╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ╚══════╝       ╚═╝   ╚═╝  ╚═╝╚══════╝     ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝
+ /$$$$$$$              /$$                   /$$     /$$
+| $$__  $$            | $$                  | $$    | $$
+| $$  \ $$  /$$$$$$  /$$$$$$   /$$$$$$$    /$$$$$$  | $$$$$$$   /$$$$$$      /$$$$$$   /$$$$$$  /$$$$$$/$$$$   /$$$$$$
+| $$$$$$$/ |____  $$|_  $$_/  /$$_____/   |_  $$_/  | $$__  $$ /$$__  $$    /$$__  $$ |____  $$| $$_  $$_  $$ /$$__  $$
+| $$__  $$  /$$$$$$$  | $$   |  $$$$$$      | $$    | $$  \ $$| $$$$$$$$   | $$  \ $$  /$$$$$$$| $$ \ $$ \ $$| $$$$$$$$
+| $$  \ $$ /$$__  $$  | $$ /$$\____  $$     | $$ /$$| $$  | $$| $$_____/   | $$  | $$ /$$__  $$| $$ | $$ | $$| $$_____/
+| $$  | $$|  $$$$$$$  |  $$$$//$$$$$$$/     |  $$$$/| $$  | $$|  $$$$$$$   |  $$$$$$$|  $$$$$$$| $$ | $$ | $$|  $$$$$$$
+|__/  |__/ \_______/   \___/ |_______/       \___/  |__/  |__/ \_______/    \____  $$ \_______/|__/ |__/ |__/ \_______/
+                                                                            /$$  \ $$
+                                                                           |  $$$$$$/
+                                                                            \______/
+
+goal:
+Defeat all rats that stand in your way!
+
+mechanics:
+This game revolves around defeating rats in turn based fights.
+Please keep in mind that certain types of rats will be more effective against others.
+The game is composed of fights against rats.
+Fights are made of rounds where you can take 4 actions:
+
+1 - attack the enemy rat, your currently selected rat will make a simple attack on the enemy rat
+
+2 - use ultimate, every type of rat has a different ultimate attack for example
+Fire type rats inflict massive damage and set the enemy on fire while Water types heal themselves
+
+3 - change rat, you can change your currently selected rat to any other rat in your deck unless it's unconscious
+
+4 - evolve rat, you can upgrade 2 stats of your choice
+
+A stage is composed of 4 fights. Once you beat a stage you can save and exit or keep fighting. After every stage all your rats are fully healed.

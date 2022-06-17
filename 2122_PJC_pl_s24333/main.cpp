@@ -3,18 +3,18 @@
 #include <chrono>
 #include <random>
 #include <regex>
+#include <fstream>
 #include "Rats.h"
 
 /*
  * to do:
  * ascii art
  * help
+ * auto healing after battle
  * save and exit/load system
  * being able to open it with the console
  * code cleanup
- * healing after battle
  */
-void help();
 
 void preparePlayer(std::vector<Rat> &v);
 
@@ -32,9 +32,11 @@ void changeRat(std::vector<Rat> const& player);
 
 bool didPlayerLoose(std::vector<Rat> const& player);
 
+void titleScreen();
+
 int main() {
     bool didPlayerWin = false;
-    std::cout << "RATS\n";
+    titleScreen();
     std::string s;
     do {
         std::cout
@@ -56,7 +58,7 @@ int main() {
             continue;
         }
         if (s == "-h" || s == "--help") {
-            help();
+            titleScreen();
             continue;
         }
         if (s == "--exit" || s == "-e") {
@@ -69,10 +71,6 @@ int main() {
         std::cout << "unknown command, for help enter -h or --help\n";
     }
     return 0;
-}
-
-void help() {
-    std::cout << "I'm helping\n";
 }
 
 /**
@@ -325,4 +323,17 @@ bool didPlayerLoose(std::vector<Rat> const& player){
         }
     }
     return true;
+}
+
+void titleScreen(){
+    std::string line;
+    std::ifstream inFile;
+    inFile.open("TitleScreen.txt");
+    if(inFile.is_open()){
+        while(std::getline(inFile, line))
+            std::cout<<line<<'\n';
+    }
+    else{
+        std::cout<<"The TitleScreen.txt file is missing! please check files integrity\n";
+    }
 }

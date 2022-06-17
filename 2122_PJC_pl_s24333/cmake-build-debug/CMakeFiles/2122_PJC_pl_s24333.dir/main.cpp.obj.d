@@ -234,6 +234,10 @@ CMakeFiles/2122_PJC_pl_s24333.dir/main.cpp.obj: \
  C:/Users/MICHNI~1/Desktop/PJATK/PJC/mingw32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++/bits/regex.tcc \
  C:/Users/MICHNI~1/Desktop/PJATK/PJC/mingw32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++/bits/regex_executor.h \
  C:/Users/MICHNI~1/Desktop/PJATK/PJC/mingw32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++/bits/regex_executor.tcc \
+ C:/Users/MICHNI~1/Desktop/PJATK/PJC/mingw32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++/fstream \
+ C:/Users/MICHNI~1/Desktop/PJATK/PJC/mingw32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++/i686-w64-mingw32/bits/basic_file.h \
+ C:/Users/MICHNI~1/Desktop/PJATK/PJC/mingw32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++/i686-w64-mingw32/bits/c++io.h \
+ C:/Users/MICHNI~1/Desktop/PJATK/PJC/mingw32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++/bits/fstream.tcc \
  C:\Users\Michnik\ tech\ tips\Documents\2122_PJC_pl_s24333\Rats-TurnBasedConsoleGame\2122_PJC_pl_s24333\Rats.h \
  C:\Users\Michnik\ tech\ tips\Documents\2122_PJC_pl_s24333\Rats-TurnBasedConsoleGame\2122_PJC_pl_s24333\Rat.h \
  C:/Users/MICHNI~1/Desktop/PJATK/PJC/mingw32/lib/gcc/i686-w64-mingw32/7.3.0/include/c++/list \
