@@ -118,7 +118,7 @@ Rat::Rat(int lvl, double hp, double str, double dex, double xpWorth, double xpTo
                                                                                    xpWorth(xpWorth),
                                                                                    xpToEvolve(xpToEvolve),
                                                                                    species(species), type(type),
-                                                                                   adv(adv), dis(dis), cantMove(0), state(NORMAL), maxDex(dex), maxHp(hp), maxStr(str) {}
+                                                                                   adv(adv), dis(dis), cantMove(0), state(NORMAL), maxDex(dex), maxHp(hp), maxStr(str), sp(0) {}
 void Rat::ult(Rat& enemy){
     switch(this->type){
         case AIR:
@@ -291,3 +291,11 @@ void Rat::setAdv(const std::list<Type> &adv) {
 void Rat::setDis(const std::list<Type> &dis) {
     Rat::dis = dis;
 }
+
+Rat::Rat(int lvl, int cantMove, double hp, double str, double dex, double sp, double xpWorth, double xpToEvolve,
+         double maxHp, double maxStr, double maxDex, const std::string &species, Rat::Type type, Rat::State state,
+         const std::list<Type> &adv, const std::list<Type> &dis) : lvl(lvl), cantMove(cantMove), hp(hp), str(str),
+                                                                   dex(dex), sp(sp), xpWorth(xpWorth),
+                                                                   xpToEvolve(xpToEvolve), maxHp(maxHp), maxStr(maxStr),
+                                                                   maxDex(maxDex), species(species), type(type),
+                                                                   state(state), adv(adv), dis(dis) {}

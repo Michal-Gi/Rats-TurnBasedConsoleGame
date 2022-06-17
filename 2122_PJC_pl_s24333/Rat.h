@@ -40,6 +40,10 @@ public:
     Rat(int lvl, double hp, double str, double dex, double xpWorth, double xpToEvolve, const std::string &species,
         Type type, const std::list<Type> &adv, const std::list<Type> &dis);
 
+    Rat(int lvl, int cantMove, double hp, double str, double dex, double sp, double xpWorth, double xpToEvolve,
+        double maxHp, double maxStr, double maxDex, const std::string &species, Type type, State state,
+        const std::list<Type> &adv, const std::list<Type> &dis);
+
     void ult(Rat &enemy);
 
     double getHp() const;

@@ -8,8 +8,6 @@
 
 /*
  * to do:
- * ascii art
- * help
  * auto healing after battle
  * save and exit/load system
  * being able to open it with the console
@@ -34,6 +32,10 @@ bool didPlayerLoose(std::vector<Rat> const& player);
 
 void titleScreen();
 
+void save(std::vector<Rat> &player, std::vector<std::vector<Rat>> &enemies);
+
+void load(std::vector<Rat> &player, std::vector<std::vector<Rat>> &enemies);
+
 int main() {
     bool didPlayerWin = false;
     titleScreen();
@@ -48,7 +50,11 @@ int main() {
     std::vector<std::vector<Rat>> enemies;
     preparePlayer(player);
     prepareEnemies(enemies);
-    while (std::cin >> s) {
+    while (true) {
+        std::cout<<R"(if you want to start the next stage enter "--fight" or "-f")"<<'\n';
+        std::cout<<R"(if you want to save and exit the game enter "--exit" or "-e")"<<'\n';
+        std::cout<<R"(if you don't know enter "--help" or "-h")"<<'\n';
+        std::cin>>s;
         if (s == "--fight" || s == "-f") {
             fight(player, enemies.at(currentEnemyBatch).at(currentEnemyRat), enemies, didPlayerWin);
             if(didPlayerLoose(player))
@@ -62,10 +68,12 @@ int main() {
             continue;
         }
         if (s == "--exit" || s == "-e") {
-            std::cout << "Are you sure you want to exit?\n press y for yes or n for no\n";
+            std::cout << "Are you sure you want to exit?\npress y to confirm\n";
             std::cin >> s;
-            if (s == "y")
+            if (s == "y"){
+                save(player, enemies);
                 return 0;
+            }
             continue;
         }
         std::cout << "unknown command, for help enter -h or --help\n";
@@ -335,5 +343,41 @@ void titleScreen(){
     }
     else{
         std::cout<<"The TitleScreen.txt file is missing! please check files integrity\n";
+    }
+}
+
+void save(std::vector<Rat> &player, std::vector<std::vector<Rat>> &enemies){
+    std::string s;
+    std::cout<<"Do you want to save your progress? press y to confirm\n";
+    std::cin>>s;
+    if(s=="y"){
+        std::ofstream SaveFile("saves.txt");
+        SaveFile << difficulty << '\n' << chosenRat << '\n' << currentEnemyBatch << '\n' << currentEnemyRat << '\n';
+        for(Rat r : player){
+            SaveFile << r.getLvl() << '\n' << r.getCantMove() << '\n' << r.getHp() << '\n' << r.getStr() << '\n' << r.getDex() << '\n' << r.getSp() << '\n' << r.getXpWorth() << '\n' << r.getXpToEvolve() << '\n' << r.getMaxHp() << '\n' << r.getMaxStr() << '\n' << r.getMaxDex() << '\n'<< r.getSpecies() << '\n' << r.getType() << '\n' << r.getState() << '\n';
+            for(Rat::Type t : r.getAdv())
+                SaveFile << t << '\n';
+            SaveFile << "dis\n";
+            for(Rat::Type t : r.getDis())
+                SaveFile << t << '\n';
+            SaveFile <<"done\n";
+        }
+        SaveFile << "enemies\n";
+        for(std::vector<Rat> v : enemies){
+            for(Rat r : v){
+                SaveFile << r.getLvl() << '\n' << r.getCantMove() << '\n' << r.getHp() << '\n' << r.getStr() << '\n' << r.getDex() << '\n' << r.getSp() << '\n' << r.getXpWorth() << '\n' << r.getXpToEvolve() << '\n' << r.getMaxHp() << '\n' << r.getMaxStr() << '\n' << r.getMaxDex() << r.getSpecies() << '\n' << r.getType() << '\n' << r.getState() << '\n';
+                for(Rat::Type t : r.getAdv())
+                    SaveFile << t << '\n';
+                SaveFile << "dis\n";
+                for(Rat::Type t : r.getDis())
+                    SaveFile << t << '\n';
+                SaveFile <<"done\n";
+            }
+            SaveFile << "superDone\n";
+        }
+
+        SaveFile.close();
+    }else{
+        remove("saves.txt");
     }
 }

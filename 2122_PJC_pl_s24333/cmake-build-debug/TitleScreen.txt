@@ -13,10 +13,29 @@
 goal:
 Defeat all rats that stand in your way!
 
-mechanics:
 This game revolves around defeating rats in turn based fights.
 Please keep in mind that certain types of rats will be more effective against others.
 The game is composed of fights against rats.
+
+how to play:
+
+First you need to choose the difficulty level. There are five official difficulty levels 0-4.
+
+After that you will be asked to choose your Rat deck. Don't worry about miss clicks.
+If you don't like the team you picked you can pick it again.
+
+After that you will find yourself on the "main screen" of the game.
+From there you can:
+
+->save and exit the game using "--exit" or "-e"
+
+->start the next stage using "--fight" or "-f"
+
+->display this screen again using "--help" or "-h"
+
+A stage is composed of 4 fights. Once you beat a stage you can save and exit or keep fighting.
+After every stage all your rats are fully healed.
+
 Fights are made of rounds where you can take 4 actions:
 
 1 - attack the enemy rat, your currently selected rat will make a simple attack on the enemy rat
@@ -28,4 +47,5 @@ Fire type rats inflict massive damage and set the enemy on fire while Water type
 
 4 - evolve rat, you can upgrade 2 stats of your choice
 
-A stage is composed of 4 fights. Once you beat a stage you can save and exit or keep fighting. After every stage all your rats are fully healed.
+
+To win the game you have to beat all stages
