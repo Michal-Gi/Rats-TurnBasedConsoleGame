@@ -7,7 +7,12 @@
 
 /*
  * to do:
+ * ascii art
+ * help
  * save and exit/load system
+ * being able to open it with the console
+ * code cleanup
+ * healing after battle
  */
 void help();
 
