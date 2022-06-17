@@ -1,8 +1,6 @@
 //
 // Created by Michnik tech tips on 14/06/2022.
 //
-
-#include <iostream>
 #include "Rats.h"
 
 AirRat::AirRat(int level) : Rat(level, 10 + level / 2, 5 + level / 2, 5 + level, 10 * level, 100 * level,

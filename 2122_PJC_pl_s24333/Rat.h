@@ -15,7 +15,7 @@
 class Rat {
 public:
     enum Type {WATER, FIRE, EARTH, AIR, STEEL, ICE};
-    enum State {PARALYZED, CHARMED, NAUSENED, UNCONSCIOUS, NORMAL};
+    enum State {UNCONSCIOUS, NORMAL, BURNING};
 protected:
     int lvl, cantMove;
     double hp, str, dex, sp, xpWorth, xpToEvolve, maxHp, maxStr, maxDex;
@@ -34,6 +34,8 @@ public:
      * script responsible for evolving player's rats
      */
     void evolve();
+
+    void heal();
 
     Rat(int lvl, double hp, double str, double dex, double xpWorth, double xpToEvolve, const std::string &species,
         Type type, const std::list<Type> &adv, const std::list<Type> &dis);
@@ -72,6 +74,42 @@ public:
     int getCantMove() const;
 
     void setCantMove(int cantMove);
+
+    void setHp(double hp);
+
+    void setLvl(int lvl);
+
+    void setStr(double str);
+
+    void setDex(double dex);
+
+    double getSp() const;
+
+    void setSp(double sp);
+
+    void setXpWorth(double xpWorth);
+
+    void setXpToEvolve(double xpToEvolve);
+
+    double getMaxHp() const;
+
+    void setMaxHp(double maxHp);
+
+    double getMaxStr() const;
+
+    void setMaxStr(double maxStr);
+
+    double getMaxDex() const;
+
+    void setMaxDex(double maxDex);
+
+    void setSpecies(const std::string &species);
+
+    void setType(Type type);
+
+    void setAdv(const std::list<Type> &adv);
+
+    void setDis(const std::list<Type> &dis);
 };
 
 

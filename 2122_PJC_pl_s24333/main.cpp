@@ -7,9 +7,6 @@
 
 /*
  * to do:
- * make fighting loops
- * implement ultimates
- * implement winning the game
  * save and exit/load system
  */
 void help();
@@ -18,7 +15,7 @@ void preparePlayer(std::vector<Rat> &v);
 
 void prepareEnemies(std::vector<std::vector<Rat>> &v);
 
-void fight(std::vector<Rat> &player, Rat &enemy, std::vector<std::vector<Rat>> &enemies);
+void fight(std::vector<Rat> &player, Rat &enemy, std::vector<std::vector<Rat>> &enemies, bool &won);
 
 bool isInteger(std::string const &s);
 
@@ -26,7 +23,12 @@ int convertToInt(std::string const &s);
 
 int difficulty, currentEnemyBatch, currentEnemyRat, chosenRat;
 
+void changeRat(std::vector<Rat> const& player);
+
+bool didPlayerLoose(std::vector<Rat> const& player);
+
 int main() {
+    bool didPlayerWin = false;
     std::cout << "RATS\n";
     std::string s;
     do {
@@ -41,7 +43,11 @@ int main() {
     prepareEnemies(enemies);
     while (std::cin >> s) {
         if (s == "--fight" || s == "-f") {
-            fight(player, enemies.at(currentEnemyBatch).at(currentEnemyRat), enemies);
+            fight(player, enemies.at(currentEnemyBatch).at(currentEnemyRat), enemies, didPlayerWin);
+            if(didPlayerLoose(player))
+                return 0;
+            if(didPlayerWin)
+                return 0;
             continue;
         }
         if (s == "-h" || s == "--help") {
@@ -55,13 +61,13 @@ int main() {
                 return 0;
             continue;
         }
-        std::cout << "nieznane polecenie\n";
+        std::cout << "unknown command, for help enter -h or --help\n";
     }
     return 0;
 }
 
 void help() {
-    std::cout << "pomagam\n";
+    std::cout << "I'm helping\n";
 }
 
 /**
@@ -177,7 +183,9 @@ void prepareEnemies(std::vector<std::vector<Rat>> &v) {
     }
 }
 
-void fight(std::vector<Rat> &player, Rat &enemy, std::vector<std::vector<Rat>> &enemies) {
+void fight(std::vector<Rat> &player, Rat &enemy, std::vector<std::vector<Rat>> &enemies, bool &won) {
+    auto seed = std::chrono::steady_clock::now().time_since_epoch().count();
+    std::default_random_engine rng(seed);
     std::string input;
     bool isPlayerAlive = true, isEnemyAlive = true;
     bool fuckup = true;
@@ -197,6 +205,7 @@ void fight(std::vector<Rat> &player, Rat &enemy, std::vector<std::vector<Rat>> &
                             if (currentEnemyRat == enemies.at(currentEnemyBatch).size() - 1) {
                                 if (currentEnemyBatch == enemies.size() - 1) {
                                     std::cout << "you won! you are the best rat trainer in all of the land!\n";
+                                    won = true;
                                 } else {
                                     currentEnemyBatch++;
                                     std::cout << "You've beaten the enemy rat! It was the last one on this level!\n";
@@ -209,13 +218,17 @@ void fight(std::vector<Rat> &player, Rat &enemy, std::vector<std::vector<Rat>> &
                         fuckup = false;
                         break;
                     case 2:
-                        player.at(chosenRat).ult(enemy);
+                        if(player.at(chosenRat).getSp()>=100){
+                            player.at(chosenRat).ult(enemy);
+                            fuckup = false;
+                        }else
+                            std::cout<<"to use ultimate attack you need 100 sp, currently your "<<player.at(chosenRat).getSpecies()<<" has only "<<player.at(chosenRat).getSp()<<" sp\n";
+                        break;
+                    case 3:{
+                        changeRat(player);
                         fuckup = false;
                         break;
-                    case 3:
-                        std::cout << "changed rat\n";
-                        fuckup = false;
-                        break;
+                    }
                     case 4:
                         if(player.at(chosenRat).getXpToEvolve()<=0){
                             player.at(chosenRat).evolve();
@@ -231,6 +244,7 @@ void fight(std::vector<Rat> &player, Rat &enemy, std::vector<std::vector<Rat>> &
             } else
                 std::cout << "Wrong type of argument!\n";
         } while (fuckup);
+        player.at(chosenRat).setSp(player.at(chosenRat).getSp()+20);
         if(isEnemyAlive){
             if(enemy.getState()==Rat::NORMAL)
             {
@@ -241,23 +255,69 @@ void fight(std::vector<Rat> &player, Rat &enemy, std::vector<std::vector<Rat>> &
                 }
             }
             else{
-                std::cout<< "enemy "<<enemy.getSpecies()<<" is "<<enemy.getState()<<" and can't attack for "<<enemy.getCantMove()<<" more turns\n";
-                enemy.setCantMove(enemy.getCantMove()-1);
+                if(enemy.getState()==Rat::BURNING){
+                    int x = rng()%10;
+                    if(enemy.getType()==Rat::FIRE){
+                        std::cout<<" burning fire type rats heals them!\n"<<enemy.getState()<<" is healed for "<<x<<" hp!\n";
+                        enemy.setHp(std::min(enemy.getMaxHp(), enemy.getHp()+x));
+                    }
+                    else{
+                        std::cout<< "enemy "<<enemy.getSpecies()<<" is "<<enemy.getState()<<" it can't attack for "<<enemy.getCantMove()-1<<" more turns and receives "<< x <<"\n";
+                        enemy.setCantMove(enemy.getCantMove()-1);
+                        enemy.setHp(enemy.getHp()-x);
+                        if(enemy.getHp()<=0)
+                            isEnemyAlive=false;
+                    }
+                }
+                else{
+                    std::cout<< "enemy "<<enemy.getSpecies()<<" is "<<enemy.getState()<<" and can't attack for "<<enemy.getCantMove()-1<<" more turns\n";
+                    enemy.setCantMove(enemy.getCantMove()-1);
+                }
             }
         }
+        if(!isPlayerAlive){
+            if(didPlayerLoose(player))
+                std::cout<<"you lost the game\n";
+            else
+                isPlayerAlive=true;
+        }
+
     }
 }
-
-bool isInteger(std::string const &s) {
-    std::regex integer_expr("[0-9]+");
-    return std::regex_match(s, integer_expr);
-}
-
-int convertToInt(std::string const &s) {
-    int x = 0;
-    for (char i: s) {
-        x *= 10;
-        x += i - '0';
+void changeRat(std::vector<Rat> const& player){
+    bool done = false;
+    while(!done){
+        std::string input;
+        std::cout<<"enter the number corresponding with the rat you want to chose\n";
+        for(int i =0; i<player.size(); i++)
+            std::cout<<i << " - "<<player.at(i).getSpecies()<< " lvl "<< player.at(i).getLvl()<<((player.at(i).getHp()<0)?(" unconscious"):(" alive"))<<'\n';
+        std::cin>>input;
+        if(isInteger(input)){
+            int y = convertToInt(input);
+            if(y>=0 && y<6){
+                if(player.at(y).getHp()>0){
+                    chosenRat = y;
+                    std::cout<<"selected rat is "<<player.at(chosenRat).getSpecies()<< " lvl "<< player.at(chosenRat).getLvl()<<'\n';
+                    done = true;
+                }
+                else
+                    std::cout<<"chosen Rat is inaccessible\n";
+            }
+            else
+                std::cout<<"wrong number\n";
+        }
+        else
+            std::cout<<"wrong type of argument\n";
     }
-    return x;
+}
+bool didPlayerLoose(std::vector<Rat> const& player){
+    if(player.at(chosenRat).getHp()>0)
+        return false;
+    for(Rat r : player){
+        if(r.getHp()>0){
+            changeRat(player);
+            return false;
+        }
+    }
+    return true;
 }
