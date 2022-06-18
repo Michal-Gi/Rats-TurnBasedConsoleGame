@@ -31,7 +31,7 @@ protected:
 public:
     /**
      * basic attack script that includes elemental affinities
-     * @param s
+     * @param s rat that player wants to attack
      */
     void attack(Rat &s);
 
@@ -40,14 +40,18 @@ public:
      */
     void evolve();
 
+    /**
+     * function used to fully heal a rat and remove all negative statuses
+     */
     void heal();
 
-    Rat(int lvl, double hp, double str, double dex, double xpWorth, double xpToEvolve, const std::string &species,
-        Type type, const std::list<Type> &adv, const std::list<Type> &dis);
+
+    Rat(int lvl, double hp, double str, double dex, double xpWorth, double xpToEvolve, std::string species,
+        Type type, std::list<Type> adv, std::list<Type> dis);
 
     Rat(int lvl, int cantMove, double hp, double str, double dex, double sp, double xpWorth, double xpToEvolve,
-        double maxHp, double maxStr, double maxDex, State state, Type type, const std::list<Type> &adv,
-        const std::list<Type> &dis, const std::string &species);
+        double maxHp, double maxStr, double maxDex, State state, Type type, std::list<Type> adv,
+        std::list<Type> dis, std::string species);
 
     void ult(Rat &enemy);
 
@@ -61,8 +65,6 @@ public:
 
     double getDex() const;
 
-    double getUlt() const;
-
     double getXpToEvolve() const;
 
     const std::string &getSpecies() const;
@@ -75,8 +77,6 @@ public:
 
     void addXp(int const &x);
 
-    void paralyzeForTurns(int const &x);
-
     State getState() const;
 
     void setState(State state);
@@ -87,39 +87,15 @@ public:
 
     void setHp(double hp);
 
-    void setLvl(int lvl);
-
-    void setStr(double str);
-
-    void setDex(double dex);
-
     double getSp() const;
 
     void setSp(double sp);
 
-    void setXpWorth(double xpWorth);
-
-    void setXpToEvolve(double xpToEvolve);
-
     double getMaxHp() const;
-
-    void setMaxHp(double maxHp);
 
     double getMaxStr() const;
 
-    void setMaxStr(double maxStr);
-
     double getMaxDex() const;
-
-    void setMaxDex(double maxDex);
-
-    void setSpecies(const std::string &species);
-
-    void setType(Type type);
-
-    void setAdv(const std::list<Type> &adv);
-
-    void setDis(const std::list<Type> &dis);
 };
 
 

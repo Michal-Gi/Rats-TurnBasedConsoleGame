@@ -52,10 +52,10 @@ RM = "C:\Program Files\JetBrains\CLion 2022.1.2\bin\cmake\win\bin\cmake.exe" -E 
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = "C:\Users\Michnik tech tips\Documents\2122_PJC_pl_s24333\Rats-TurnBasedConsoleGame\2122_PJC_pl_s24333"
+CMAKE_SOURCE_DIR = "C:\Users\Michnik tech tips\Desktop\Rats-TurnBasedConsoleGame\2122_PJC_pl_s24333"
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = "C:\Users\Michnik tech tips\Documents\2122_PJC_pl_s24333\Rats-TurnBasedConsoleGame\2122_PJC_pl_s24333\cmake-build-debug"
+CMAKE_BINARY_DIR = "C:\Users\Michnik tech tips\Desktop\Rats-TurnBasedConsoleGame\2122_PJC_pl_s24333\cmake-build-debug"
 
 # Include any dependencies generated for this target.
 include CMakeFiles/2122_PJC_pl_s24333.dir/depend.make
@@ -71,44 +71,44 @@ include CMakeFiles/2122_PJC_pl_s24333.dir/flags.make
 CMakeFiles/2122_PJC_pl_s24333.dir/main.cpp.obj: CMakeFiles/2122_PJC_pl_s24333.dir/flags.make
 CMakeFiles/2122_PJC_pl_s24333.dir/main.cpp.obj: ../main.cpp
 CMakeFiles/2122_PJC_pl_s24333.dir/main.cpp.obj: CMakeFiles/2122_PJC_pl_s24333.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\Michnik tech tips\Documents\2122_PJC_pl_s24333\Rats-TurnBasedConsoleGame\2122_PJC_pl_s24333\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/2122_PJC_pl_s24333.dir/main.cpp.obj"
-	C:\Users\MICHNI~1\Desktop\PJATK\PJC\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/2122_PJC_pl_s24333.dir/main.cpp.obj -MF CMakeFiles\2122_PJC_pl_s24333.dir\main.cpp.obj.d -o CMakeFiles\2122_PJC_pl_s24333.dir\main.cpp.obj -c "C:\Users\Michnik tech tips\Documents\2122_PJC_pl_s24333\Rats-TurnBasedConsoleGame\2122_PJC_pl_s24333\main.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\Michnik tech tips\Desktop\Rats-TurnBasedConsoleGame\2122_PJC_pl_s24333\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/2122_PJC_pl_s24333.dir/main.cpp.obj"
+	C:\Users\MICHNI~1\Desktop\PJATK\PJC\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/2122_PJC_pl_s24333.dir/main.cpp.obj -MF CMakeFiles\2122_PJC_pl_s24333.dir\main.cpp.obj.d -o CMakeFiles\2122_PJC_pl_s24333.dir\main.cpp.obj -c "C:\Users\Michnik tech tips\Desktop\Rats-TurnBasedConsoleGame\2122_PJC_pl_s24333\main.cpp"
 
 CMakeFiles/2122_PJC_pl_s24333.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/2122_PJC_pl_s24333.dir/main.cpp.i"
-	C:\Users\MICHNI~1\Desktop\PJATK\PJC\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\Michnik tech tips\Documents\2122_PJC_pl_s24333\Rats-TurnBasedConsoleGame\2122_PJC_pl_s24333\main.cpp" > CMakeFiles\2122_PJC_pl_s24333.dir\main.cpp.i
+	C:\Users\MICHNI~1\Desktop\PJATK\PJC\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\Michnik tech tips\Desktop\Rats-TurnBasedConsoleGame\2122_PJC_pl_s24333\main.cpp" > CMakeFiles\2122_PJC_pl_s24333.dir\main.cpp.i
 
 CMakeFiles/2122_PJC_pl_s24333.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/2122_PJC_pl_s24333.dir/main.cpp.s"
-	C:\Users\MICHNI~1\Desktop\PJATK\PJC\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\Michnik tech tips\Documents\2122_PJC_pl_s24333\Rats-TurnBasedConsoleGame\2122_PJC_pl_s24333\main.cpp" -o CMakeFiles\2122_PJC_pl_s24333.dir\main.cpp.s
+	C:\Users\MICHNI~1\Desktop\PJATK\PJC\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\Michnik tech tips\Desktop\Rats-TurnBasedConsoleGame\2122_PJC_pl_s24333\main.cpp" -o CMakeFiles\2122_PJC_pl_s24333.dir\main.cpp.s
 
 CMakeFiles/2122_PJC_pl_s24333.dir/Rat.cpp.obj: CMakeFiles/2122_PJC_pl_s24333.dir/flags.make
 CMakeFiles/2122_PJC_pl_s24333.dir/Rat.cpp.obj: ../Rat.cpp
 CMakeFiles/2122_PJC_pl_s24333.dir/Rat.cpp.obj: CMakeFiles/2122_PJC_pl_s24333.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\Michnik tech tips\Documents\2122_PJC_pl_s24333\Rats-TurnBasedConsoleGame\2122_PJC_pl_s24333\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/2122_PJC_pl_s24333.dir/Rat.cpp.obj"
-	C:\Users\MICHNI~1\Desktop\PJATK\PJC\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/2122_PJC_pl_s24333.dir/Rat.cpp.obj -MF CMakeFiles\2122_PJC_pl_s24333.dir\Rat.cpp.obj.d -o CMakeFiles\2122_PJC_pl_s24333.dir\Rat.cpp.obj -c "C:\Users\Michnik tech tips\Documents\2122_PJC_pl_s24333\Rats-TurnBasedConsoleGame\2122_PJC_pl_s24333\Rat.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\Michnik tech tips\Desktop\Rats-TurnBasedConsoleGame\2122_PJC_pl_s24333\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/2122_PJC_pl_s24333.dir/Rat.cpp.obj"
+	C:\Users\MICHNI~1\Desktop\PJATK\PJC\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/2122_PJC_pl_s24333.dir/Rat.cpp.obj -MF CMakeFiles\2122_PJC_pl_s24333.dir\Rat.cpp.obj.d -o CMakeFiles\2122_PJC_pl_s24333.dir\Rat.cpp.obj -c "C:\Users\Michnik tech tips\Desktop\Rats-TurnBasedConsoleGame\2122_PJC_pl_s24333\Rat.cpp"
 
 CMakeFiles/2122_PJC_pl_s24333.dir/Rat.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/2122_PJC_pl_s24333.dir/Rat.cpp.i"
-	C:\Users\MICHNI~1\Desktop\PJATK\PJC\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\Michnik tech tips\Documents\2122_PJC_pl_s24333\Rats-TurnBasedConsoleGame\2122_PJC_pl_s24333\Rat.cpp" > CMakeFiles\2122_PJC_pl_s24333.dir\Rat.cpp.i
+	C:\Users\MICHNI~1\Desktop\PJATK\PJC\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\Michnik tech tips\Desktop\Rats-TurnBasedConsoleGame\2122_PJC_pl_s24333\Rat.cpp" > CMakeFiles\2122_PJC_pl_s24333.dir\Rat.cpp.i
 
 CMakeFiles/2122_PJC_pl_s24333.dir/Rat.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/2122_PJC_pl_s24333.dir/Rat.cpp.s"
-	C:\Users\MICHNI~1\Desktop\PJATK\PJC\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\Michnik tech tips\Documents\2122_PJC_pl_s24333\Rats-TurnBasedConsoleGame\2122_PJC_pl_s24333\Rat.cpp" -o CMakeFiles\2122_PJC_pl_s24333.dir\Rat.cpp.s
+	C:\Users\MICHNI~1\Desktop\PJATK\PJC\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\Michnik tech tips\Desktop\Rats-TurnBasedConsoleGame\2122_PJC_pl_s24333\Rat.cpp" -o CMakeFiles\2122_PJC_pl_s24333.dir\Rat.cpp.s
 
 CMakeFiles/2122_PJC_pl_s24333.dir/Rats.cpp.obj: CMakeFiles/2122_PJC_pl_s24333.dir/flags.make
 CMakeFiles/2122_PJC_pl_s24333.dir/Rats.cpp.obj: ../Rats.cpp
 CMakeFiles/2122_PJC_pl_s24333.dir/Rats.cpp.obj: CMakeFiles/2122_PJC_pl_s24333.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\Michnik tech tips\Documents\2122_PJC_pl_s24333\Rats-TurnBasedConsoleGame\2122_PJC_pl_s24333\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/2122_PJC_pl_s24333.dir/Rats.cpp.obj"
-	C:\Users\MICHNI~1\Desktop\PJATK\PJC\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/2122_PJC_pl_s24333.dir/Rats.cpp.obj -MF CMakeFiles\2122_PJC_pl_s24333.dir\Rats.cpp.obj.d -o CMakeFiles\2122_PJC_pl_s24333.dir\Rats.cpp.obj -c "C:\Users\Michnik tech tips\Documents\2122_PJC_pl_s24333\Rats-TurnBasedConsoleGame\2122_PJC_pl_s24333\Rats.cpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="C:\Users\Michnik tech tips\Desktop\Rats-TurnBasedConsoleGame\2122_PJC_pl_s24333\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/2122_PJC_pl_s24333.dir/Rats.cpp.obj"
+	C:\Users\MICHNI~1\Desktop\PJATK\PJC\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/2122_PJC_pl_s24333.dir/Rats.cpp.obj -MF CMakeFiles\2122_PJC_pl_s24333.dir\Rats.cpp.obj.d -o CMakeFiles\2122_PJC_pl_s24333.dir\Rats.cpp.obj -c "C:\Users\Michnik tech tips\Desktop\Rats-TurnBasedConsoleGame\2122_PJC_pl_s24333\Rats.cpp"
 
 CMakeFiles/2122_PJC_pl_s24333.dir/Rats.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/2122_PJC_pl_s24333.dir/Rats.cpp.i"
-	C:\Users\MICHNI~1\Desktop\PJATK\PJC\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\Michnik tech tips\Documents\2122_PJC_pl_s24333\Rats-TurnBasedConsoleGame\2122_PJC_pl_s24333\Rats.cpp" > CMakeFiles\2122_PJC_pl_s24333.dir\Rats.cpp.i
+	C:\Users\MICHNI~1\Desktop\PJATK\PJC\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E "C:\Users\Michnik tech tips\Desktop\Rats-TurnBasedConsoleGame\2122_PJC_pl_s24333\Rats.cpp" > CMakeFiles\2122_PJC_pl_s24333.dir\Rats.cpp.i
 
 CMakeFiles/2122_PJC_pl_s24333.dir/Rats.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/2122_PJC_pl_s24333.dir/Rats.cpp.s"
-	C:\Users\MICHNI~1\Desktop\PJATK\PJC\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\Michnik tech tips\Documents\2122_PJC_pl_s24333\Rats-TurnBasedConsoleGame\2122_PJC_pl_s24333\Rats.cpp" -o CMakeFiles\2122_PJC_pl_s24333.dir\Rats.cpp.s
+	C:\Users\MICHNI~1\Desktop\PJATK\PJC\mingw32\bin\G__~1.EXE $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S "C:\Users\Michnik tech tips\Desktop\Rats-TurnBasedConsoleGame\2122_PJC_pl_s24333\Rats.cpp" -o CMakeFiles\2122_PJC_pl_s24333.dir\Rats.cpp.s
 
 # Object files for target 2122_PJC_pl_s24333
 2122_PJC_pl_s24333_OBJECTS = \
@@ -126,7 +126,7 @@ CMakeFiles/2122_PJC_pl_s24333.dir/Rats.cpp.s: cmake_force
 2122_PJC_pl_s24333.exe: CMakeFiles/2122_PJC_pl_s24333.dir/linklibs.rsp
 2122_PJC_pl_s24333.exe: CMakeFiles/2122_PJC_pl_s24333.dir/objects1.rsp
 2122_PJC_pl_s24333.exe: CMakeFiles/2122_PJC_pl_s24333.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="C:\Users\Michnik tech tips\Documents\2122_PJC_pl_s24333\Rats-TurnBasedConsoleGame\2122_PJC_pl_s24333\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable 2122_PJC_pl_s24333.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="C:\Users\Michnik tech tips\Desktop\Rats-TurnBasedConsoleGame\2122_PJC_pl_s24333\cmake-build-debug\CMakeFiles" --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable 2122_PJC_pl_s24333.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\2122_PJC_pl_s24333.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -138,6 +138,6 @@ CMakeFiles/2122_PJC_pl_s24333.dir/clean:
 .PHONY : CMakeFiles/2122_PJC_pl_s24333.dir/clean
 
 CMakeFiles/2122_PJC_pl_s24333.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" "C:\Users\Michnik tech tips\Documents\2122_PJC_pl_s24333\Rats-TurnBasedConsoleGame\2122_PJC_pl_s24333" "C:\Users\Michnik tech tips\Documents\2122_PJC_pl_s24333\Rats-TurnBasedConsoleGame\2122_PJC_pl_s24333" "C:\Users\Michnik tech tips\Documents\2122_PJC_pl_s24333\Rats-TurnBasedConsoleGame\2122_PJC_pl_s24333\cmake-build-debug" "C:\Users\Michnik tech tips\Documents\2122_PJC_pl_s24333\Rats-TurnBasedConsoleGame\2122_PJC_pl_s24333\cmake-build-debug" "C:\Users\Michnik tech tips\Documents\2122_PJC_pl_s24333\Rats-TurnBasedConsoleGame\2122_PJC_pl_s24333\cmake-build-debug\CMakeFiles\2122_PJC_pl_s24333.dir\DependInfo.cmake" --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" "C:\Users\Michnik tech tips\Desktop\Rats-TurnBasedConsoleGame\2122_PJC_pl_s24333" "C:\Users\Michnik tech tips\Desktop\Rats-TurnBasedConsoleGame\2122_PJC_pl_s24333" "C:\Users\Michnik tech tips\Desktop\Rats-TurnBasedConsoleGame\2122_PJC_pl_s24333\cmake-build-debug" "C:\Users\Michnik tech tips\Desktop\Rats-TurnBasedConsoleGame\2122_PJC_pl_s24333\cmake-build-debug" "C:\Users\Michnik tech tips\Desktop\Rats-TurnBasedConsoleGame\2122_PJC_pl_s24333\cmake-build-debug\CMakeFiles\2122_PJC_pl_s24333.dir\DependInfo.cmake" --color=$(COLOR)
 .PHONY : CMakeFiles/2122_PJC_pl_s24333.dir/depend
 

@@ -4,6 +4,7 @@
 #include <chrono>
 #include <iostream>
 #include <regex>
+#include <utility>
 #include "Rat.h"
 
 //
@@ -116,14 +117,15 @@ void Rat::evolve() {
     }
 }
 
-Rat::Rat(int lvl, double hp, double str, double dex, double xpWorth, double xpToEvolve, const std::string &species,
-         Rat::Type type, const std::list<Type> &adv, const std::list<Type> &dis) : lvl(lvl), hp(hp), str(str), dex(dex),
-                                                                                   xpWorth(xpWorth),
-                                                                                   xpToEvolve(xpToEvolve),
-                                                                                   species(species), type(type),
-                                                                                   adv(adv), dis(dis), cantMove(0),
-                                                                                   state(NORMAL), maxDex(dex),
-                                                                                   maxHp(hp), maxStr(str), sp(0) {}
+Rat::Rat(int lvl, double hp, double str, double dex, double xpWorth, double xpToEvolve, std::string species,
+         Rat::Type type, std::list<Type> adv, std::list<Type> dis) : lvl(lvl), hp(hp), str(str), dex(dex),
+                                                                     xpWorth(xpWorth),
+                                                                     xpToEvolve(xpToEvolve),
+                                                                     species(std::move(species)), type(type),
+                                                                     adv(std::move(adv)), dis(std::move(dis)),
+                                                                     cantMove(0),
+                                                                     state(NORMAL), maxDex(dex),
+                                                                     maxHp(hp), maxStr(str), sp(0) {}
 
 void Rat::ult(Rat &enemy) {
     switch (this->type) {
@@ -175,10 +177,6 @@ double Rat::getDex() const {
     return dex;
 }
 
-double Rat::getUlt() const {
-    return sp;
-}
-
 double Rat::getXpToEvolve() const {
     return xpToEvolve;
 }
@@ -203,24 +201,20 @@ void Rat::addXp(int const &x) {
     xpToEvolve -= x;
 }
 
-void Rat::paralyzeForTurns(int const &x) {
-    this->cantMove += x;
-}
-
 Rat::State Rat::getState() const {
     return state;
 }
 
-void Rat::setState(Rat::State state) {
-    Rat::state = state;
+void Rat::setState(Rat::State state1) {
+    Rat::state = state1;
 }
 
 int Rat::getCantMove() const {
     return cantMove;
 }
 
-void Rat::setCantMove(int cantMove) {
-    Rat::cantMove = cantMove;
+void Rat::setCantMove(int cantMove1) {
+    Rat::cantMove = cantMove1;
 }
 
 void Rat::heal() {
@@ -229,83 +223,36 @@ void Rat::heal() {
     this->dex = this->maxDex;
 }
 
-void Rat::setHp(double hp) {
-    Rat::hp = hp;
-}
-
-void Rat::setLvl(int lvl) {
-    Rat::lvl = lvl;
-}
-
-void Rat::setStr(double str) {
-    Rat::str = str;
-}
-
-void Rat::setDex(double dex) {
-    Rat::dex = dex;
+void Rat::setHp(double hp1) {
+    Rat::hp = hp1;
 }
 
 double Rat::getSp() const {
     return sp;
 }
 
-void Rat::setSp(double sp) {
-    Rat::sp = sp;
-}
-
-void Rat::setXpWorth(double xpWorth) {
-    Rat::xpWorth = xpWorth;
-}
-
-void Rat::setXpToEvolve(double xpToEvolve) {
-    Rat::xpToEvolve = xpToEvolve;
+void Rat::setSp(double sp1) {
+    Rat::sp = sp1;
 }
 
 double Rat::getMaxHp() const {
     return maxHp;
 }
 
-void Rat::setMaxHp(double maxHp) {
-    Rat::maxHp = maxHp;
-}
-
 double Rat::getMaxStr() const {
     return maxStr;
-}
-
-void Rat::setMaxStr(double maxStr) {
-    Rat::maxStr = maxStr;
 }
 
 double Rat::getMaxDex() const {
     return maxDex;
 }
 
-void Rat::setMaxDex(double maxDex) {
-    Rat::maxDex = maxDex;
-}
-
-void Rat::setSpecies(const std::string &species) {
-    Rat::species = species;
-}
-
-void Rat::setType(Rat::Type type) {
-    Rat::type = type;
-}
-
-void Rat::setAdv(const std::list<Type> &adv) {
-    Rat::adv = adv;
-}
-
-void Rat::setDis(const std::list<Type> &dis) {
-    Rat::dis = dis;
-}
-
 Rat::Rat(int lvl, int cantMove, double hp, double str, double dex, double sp, double xpWorth, double xpToEvolve,
-         double maxHp, double maxStr, double maxDex, Rat::State state, Rat::Type type, const std::list<Type> &adv,
-         const std::list<Type> &dis, const std::string &species) : lvl(lvl), cantMove(cantMove), hp(hp), str(str),
-                                                                     dex(dex), sp(sp), xpWorth(xpWorth),
-                                                                     xpToEvolve(xpToEvolve), maxHp(maxHp),
-                                                                     maxStr(maxStr), maxDex(maxDex), state(state),
-                                                                     type(type), adv(adv), dis(dis), species(species) {}
+         double maxHp, double maxStr, double maxDex, Rat::State state, Rat::Type type, std::list<Type> adv,
+         std::list<Type> dis, std::string species) : lvl(lvl), cantMove(cantMove), hp(hp), str(str),
+                                                     dex(dex), sp(sp), xpWorth(xpWorth),
+                                                     xpToEvolve(xpToEvolve), maxHp(maxHp),
+                                                     maxStr(maxStr), maxDex(maxDex), state(state),
+                                                     type(type), adv(std::move(adv)), dis(std::move(dis)),
+                                                     species(std::move(species)) {}
 
