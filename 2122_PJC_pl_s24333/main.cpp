@@ -9,7 +9,6 @@
 /*
  * to do:
  * auto healing after battle
- * save and exit/load system
  * being able to open it with the console
  * code cleanup
  */
@@ -40,16 +39,9 @@ int main() {
     bool didPlayerWin = false;
     titleScreen();
     std::string s;
-    do {
-        std::cout
-                << "please enter the difficulty level you want to experience:\n0 - easy\n1 - normal\n2 - tough\n3 - hell\n4 - just don't\n";
-        std::cin >> s;
-    } while (!isInteger(s));
-    difficulty = convertToInt(s);
     std::vector<Rat> player;
     std::vector<std::vector<Rat>> enemies;
-    preparePlayer(player);
-    prepareEnemies(enemies);
+    load(player, enemies);
     while (true) {
         std::cout<<R"(if you want to start the next stage enter "--fight" or "-f")"<<'\n';
         std::cout<<R"(if you want to save and exit the game enter "--exit" or "-e")"<<'\n';
@@ -78,7 +70,6 @@ int main() {
         }
         std::cout << "unknown command, for help enter -h or --help\n";
     }
-    return 0;
 }
 
 /**
@@ -354,7 +345,7 @@ void save(std::vector<Rat> &player, std::vector<std::vector<Rat>> &enemies){
         std::ofstream SaveFile("saves.txt");
         SaveFile << difficulty << '\n' << chosenRat << '\n' << currentEnemyBatch << '\n' << currentEnemyRat << '\n';
         for(Rat r : player){
-            SaveFile << r.getLvl() << '\n' << r.getCantMove() << '\n' << r.getHp() << '\n' << r.getStr() << '\n' << r.getDex() << '\n' << r.getSp() << '\n' << r.getXpWorth() << '\n' << r.getXpToEvolve() << '\n' << r.getMaxHp() << '\n' << r.getMaxStr() << '\n' << r.getMaxDex() << '\n'<< r.getSpecies() << '\n' << r.getType() << '\n' << r.getState() << '\n';
+            SaveFile << r.getLvl() << '\n' << r.getCantMove() << '\n' << r.getHp() << '\n' << r.getStr() << '\n' << r.getDex() << '\n' << r.getSp() << '\n' << r.getXpWorth() << '\n' << r.getXpToEvolve() << '\n' << r.getMaxHp() << '\n' << r.getMaxStr() << '\n' << r.getMaxDex() << '\n'  << r.getState() << '\n' << r.getType() << '\n'<< r.getSpecies() << '\n';
             for(Rat::Type t : r.getAdv())
                 SaveFile << t << '\n';
             SaveFile << "dis\n";
@@ -362,22 +353,277 @@ void save(std::vector<Rat> &player, std::vector<std::vector<Rat>> &enemies){
                 SaveFile << t << '\n';
             SaveFile <<"done\n";
         }
-        SaveFile << "enemies\n";
         for(std::vector<Rat> v : enemies){
             for(Rat r : v){
-                SaveFile << r.getLvl() << '\n' << r.getCantMove() << '\n' << r.getHp() << '\n' << r.getStr() << '\n' << r.getDex() << '\n' << r.getSp() << '\n' << r.getXpWorth() << '\n' << r.getXpToEvolve() << '\n' << r.getMaxHp() << '\n' << r.getMaxStr() << '\n' << r.getMaxDex() << r.getSpecies() << '\n' << r.getType() << '\n' << r.getState() << '\n';
-                for(Rat::Type t : r.getAdv())
+                SaveFile << r.getLvl() << '\n' << r.getCantMove() << '\n' << r.getHp() << '\n' << r.getStr() << '\n' << r.getDex() << '\n' << r.getSp() << '\n' << r.getXpWorth() << '\n' << r.getXpToEvolve() << '\n' << r.getMaxHp() << '\n' << r.getMaxStr() << '\n' << r.getMaxDex() << '\n'<< r.getType() << '\n' << r.getState() << '\n' << r.getSpecies() << '\n';
+                for(Rat::Type t : r.getAdv()) {
                     SaveFile << t << '\n';
+                }
                 SaveFile << "dis\n";
-                for(Rat::Type t : r.getDis())
+                for(Rat::Type t : r.getDis()) {
                     SaveFile << t << '\n';
+                }
                 SaveFile <<"done\n";
             }
             SaveFile << "superDone\n";
         }
-
+        SaveFile << "enemies\n";
         SaveFile.close();
     }else{
         remove("saves.txt");
+    }
+}
+
+void load(std::vector<Rat> &player, std::vector<std::vector<Rat>> &enemies){
+    std::string data;
+    double numericData;
+    std::ifstream savedGame;
+    savedGame.open("saves.txt");
+    if(savedGame.is_open()){
+        //loading game settings
+        savedGame >> difficulty;
+        savedGame >> chosenRat;
+        savedGame >> currentEnemyBatch;
+        savedGame >> currentEnemyRat;
+        //loading player rats
+        for(int i = 0; i<6; i++){
+            double rat[11];
+            std::string species;
+            std::list<Rat::Type> adv;
+            std::list<Rat::Type> dis;
+            //loading first 11 stats of player's rat
+            for(int j =0; j<11; j++){
+                savedGame >> rat[j];
+            }
+            Rat::Type type;
+            Rat::State state;
+            std::getline(savedGame, data);
+            //loading the state of the rat
+            switch(convertToInt(data)){
+                case 0:
+                    state = Rat::UNCONSCIOUS;
+                    break;
+                case 1:
+                    state = Rat::NORMAL;
+                    break;
+                case 2:
+                    state = Rat::BURNING;
+            }
+            std::getline(savedGame, data);
+            //loading the type of the rat
+            switch(convertToInt(data)) {
+                case 0:
+                    type = Rat::WATER;
+                    break;
+                case 1:
+                    type = Rat::FIRE;
+                    break;
+                case 2:
+                    type = Rat::EARTH;
+                    break;
+                case 3:
+                    type = Rat::AIR;
+                    break;
+                case 4:
+                    type = Rat::STEEL;
+                    break;
+                case 5:
+                    type = Rat::ICE;
+                    break;
+            }
+            bool done = false;
+            //loading the list of types of rats this rat is strong against
+            while(!done){
+                std::getline(savedGame, data);
+                species = data;
+                if(data!="dis"){
+                    switch(convertToInt(data)){
+                        case 0:
+                            adv.push_back(Rat::WATER);
+                            break;
+                        case 1:
+                            adv.push_back(Rat::FIRE);
+                            break;
+                        case 2:
+                            adv.push_back(Rat::EARTH);
+                            break;
+                        case 3:
+                            adv.push_back(Rat::AIR);
+                            break;
+                        case 4:
+                            adv.push_back(Rat::STEEL);
+                            break;
+                        case 5:
+                            adv.push_back(Rat::ICE);
+                            break;
+                    }
+                }
+                else {
+                    done = true;
+                }
+            }
+            done = false;
+            //loading the list of types of rats this rat is weak against
+            while(!done){
+                std::getline(savedGame, data);
+                if(data!="done"){
+                    switch(convertToInt(data)){
+                        case 0:
+                            dis.push_back(Rat::WATER);
+                            break;
+                        case 1:
+                            dis.push_back(Rat::FIRE);
+                            break;
+                        case 2:
+                            dis.push_back(Rat::EARTH);
+                            break;
+                        case 3:
+                            dis.push_back(Rat::AIR);
+                            break;
+                        case 4:
+                            dis.push_back(Rat::STEEL);
+                            break;
+                        case 5:
+                            dis.push_back(Rat::ICE);
+                            break;
+                    }
+                }
+                else
+                    done = true;
+            }
+            player.push_back(Rat((int)rat[0], (int)rat[1], rat[2], rat[3], rat[4], rat[5], rat[6], rat[7], rat[8], rat[9], rat[10], state, type, adv, dis, species));
+        }
+        bool ready=false;
+        int i =0;
+        std::vector<Rat> enemy;
+        while(!ready){
+            std::getline(savedGame, data);
+            if(isInteger(data)){
+            double rat[11];
+            rat[0] = convertToInt(data);
+            std::string species;
+            std::list<Rat::Type> adv;
+            std::list<Rat::Type> dis;
+            //loading first 11 stats of player's rat
+            for(int j =1; j<11; j++){
+                savedGame >> rat[j];
+            }
+            Rat::Type type;
+            Rat::State state;
+            std::getline(savedGame, data);
+            //loading the state of the rat
+            switch(convertToInt(data)){
+                case 0:
+                    state = Rat::UNCONSCIOUS;
+                    break;
+                case 1:
+                    state = Rat::NORMAL;
+                    break;
+                case 2:
+                    state = Rat::BURNING;
+            }
+            std::getline(savedGame, data);
+            //loading the type of the rat
+            switch(convertToInt(data)) {
+                case 0:
+                    type = Rat::WATER;
+                    break;
+                case 1:
+                    type = Rat::FIRE;
+                    break;
+                case 2:
+                    type = Rat::EARTH;
+                    break;
+                case 3:
+                    type = Rat::AIR;
+                    break;
+                case 4:
+                    type = Rat::STEEL;
+                    break;
+                case 5:
+                    type = Rat::ICE;
+                    break;
+            }
+            bool done = false;
+            //loading the list of types of rats this rat is strong against
+            while(!done){
+                std::getline(savedGame, data);
+                species = data;
+                if(data!="dis"){
+                    switch(convertToInt(data)){
+                        case 0:
+                            adv.push_back(Rat::WATER);
+                            break;
+                        case 1:
+                            adv.push_back(Rat::FIRE);
+                            break;
+                        case 2:
+                            adv.push_back(Rat::EARTH);
+                            break;
+                        case 3:
+                            adv.push_back(Rat::AIR);
+                            break;
+                        case 4:
+                            adv.push_back(Rat::STEEL);
+                            break;
+                        case 5:
+                            adv.push_back(Rat::ICE);
+                            break;
+                    }
+                }
+                else {
+                    done = true;
+                }
+            }
+            done = false;
+            //loading the list of types of rats this rat is weak against
+            while(!done){
+                std::getline(savedGame, data);
+                if(data!="done"){
+                    switch(convertToInt(data)){
+                        case 0:
+                            dis.push_back(Rat::WATER);
+                            break;
+                        case 1:
+                            dis.push_back(Rat::FIRE);
+                            break;
+                        case 2:
+                            dis.push_back(Rat::EARTH);
+                            break;
+                        case 3:
+                            dis.push_back(Rat::AIR);
+                            break;
+                        case 4:
+                            dis.push_back(Rat::STEEL);
+                            break;
+                        case 5:
+                            dis.push_back(Rat::ICE);
+                            break;
+                    }
+                }
+                else
+                    done = true;
+            }
+            enemy.push_back(Rat((int)rat[0], (int)rat[1], rat[2], rat[3], rat[4], rat[5], rat[6], rat[7], rat[8], rat[9], rat[10], state, type, adv, dis, species));
+            i++;
+            }
+            if(data=="superDone"){
+                enemies.push_back(enemy);
+                enemy = {};
+            }
+            if(data=="enemies")
+                ready = true;
+        }
+    }
+    else{
+        std::string s;
+        do {
+            std::cout
+                    << "please enter the difficulty level you want to experience:\n0 - easy\n1 - normal\n2 - tough\n3 - hell\n4 - just don't\n";
+            std::cin >> s;
+        } while (!isInteger(s));
+        difficulty = convertToInt(s);
+        preparePlayer(player);
+        prepareEnemies(enemies);
     }
 }
